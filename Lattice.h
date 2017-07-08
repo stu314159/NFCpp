@@ -7,7 +7,7 @@ class Lattice{
     ~Lattice();
 
   private:
-    const int Nx, Ny, Nz // global lattice size
+    const int Nx, Ny, Nz; // global lattice size
     // data members that all classes deriving from Lattice must have (and initialize)
     float * ex;
     float * ey;
@@ -15,5 +15,5 @@ class Lattice{
     float * w;
     int * bbSpd;
     int numSpd;
-}
+};
 #endif
