@@ -17,8 +17,8 @@ endif
 
 
 
-SOURCES= Lattice.cpp
-OBJECTS= Lattice.o
+SOURCES= Lattice.cpp testMain.cpp
+OBJECTS= Lattice.o  testMain.o
 LIBS=
 
 TARGET=NFCpp
