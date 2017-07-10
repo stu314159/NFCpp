@@ -19,8 +19,7 @@ Lattice::~Lattice()
 }
 
 void Lattice::computeMacroscopicData(float& rho, float& ux, float& uy, float& uz,
-		                             const float * f, const int numSpd,
-		                             const float * ex, const float * ey, const float * ez)
+		                             const float * f)
 {
 	rho = 0.; ux = 0.; uy = 0.; uz = 0.;
 	for(int spd = 0; spd<numSpd; spd++)

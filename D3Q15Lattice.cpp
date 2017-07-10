@@ -12,7 +12,13 @@ w{2.f/9.f,1.f/9.f,1.f/9,1.f/9.f,1.f/9.f,1.f/9.f,1.f/9.f,
     1.f/72.f,1.f/72.f,1.f/72.f,1.f/72.f},
 bbSpd{0,2,1,4,3,6,5,14,13,12,11,10,9,8,7}
 {
-
+	// direct base-class pointers to lattice variables
+	setNumSpd(numSpd);
+	setEx(ex);
+	setEy(ey);
+	setEz(ez);
+	setW(w);
+	setBBspd(bbSpd);
 }
 
 D3Q15Lattice::~D3Q15Lattice()

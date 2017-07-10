@@ -18,7 +18,13 @@ w{3.f/9.f,1.f/18.f,1.f/18.f,1.f/18.f,1.f/18.f,1.f/18.f,1.f/18.f,
     1.f/36.f,1.f/36.f,1.f/36.f,1.f/36.f,1.f/36.f,1.f/36.f},
 bbSpd{0, 2, 1, 4, 3, 6, 5, 10, 9, 8, 7, 14, 13, 12, 11, 18, 17, 16, 15}
 {
-
+	// direct base-class pointers to lattice variables
+	setNumSpd(numSpd);
+	setEx(ex);
+	setEy(ey);
+	setEz(ez);
+	setW(w);
+	setBBspd(bbSpd);
 
 
 }
