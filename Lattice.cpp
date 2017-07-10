@@ -32,5 +32,14 @@ void Lattice::computeMacroscopicData(float& rho, float& ux, float& uy, float& uz
 
 void Lattice::computeEquilibrium(float * fEq)
 {
+	//this will assume that up-to-date data exists in rho, ux, uy, and uz class variables
+	//and that ex,ey,ez,and w have been updated with the lattice-specific info
+	float cu;
+	for(int spd = 0; spd<numSpd;spd++)
+	{
+		fEq[spd] = 0;
+		cu = 3.f*(ex[spd]*ux+ey[spd]*uy+ez[spd]*uz);
+		fEq[spd]=w[spd]*rho*(1.f+cu+0.5f*(cu*cu)-3.f/2.f*(ux*ux+uy*uy+uz*uz));
 
+	}
 }
