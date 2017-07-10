@@ -16,6 +16,13 @@ class D3Q19Lattice: public Lattice
 public:
 	D3Q19Lattice(const int Nx, const int Ny, const int Nz);
 	~D3Q19Lattice();
+private:
+	static const int numSpd=19;
+	float ex[numSpd];
+	float ey[numSpd];
+	float ez[numSpd];
+	float w[numSpd];
+	int bbSpd[numSpd];
 
 };
 

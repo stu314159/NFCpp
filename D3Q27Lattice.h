@@ -14,6 +14,14 @@ class D3Q27Lattice: public Lattice
 public:
 	D3Q27Lattice(const int Nx, const int Ny, const int Nz);
 	~D3Q27Lattice();
+private:
+	static const int numSpd=27;
+	float ex[numSpd];
+	float ey[numSpd];
+	float ez[numSpd];
+	float w[numSpd];
+	int bbSpd[numSpd];
+
 };
 
 

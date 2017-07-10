@@ -10,6 +10,12 @@ class D3Q15Lattice: public Lattice
     ~D3Q15Lattice();
 
   private:
+    static const int numSpd=15;
+    float ex[numSpd];
+    float ey[numSpd];
+    float ez[numSpd];
+    float w[numSpd];
+    int bbSpd[numSpd];
 
 };
 
