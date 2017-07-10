@@ -16,10 +16,7 @@ class Lattice{
     void setEz(float * z){ez = z;}
     void setW(float * tw){w = tw;}
     void setBBspd(int* BB){bbSpd = BB;}
-    void setF(float * fi){f =fi;}
-    void setFeq(float * feq){fEq = feq;}
-    void setFt(float * FT){ft = FT;}
-    void loadF(const int idx, const float val){f[idx]=val;}
+    void loadF(const int idx, const float val){f[idx]=val;} //<-- ?? consider changing this in light of LDH
     float * get_ex(){return ex;}
     float * get_ey(){return ey;}
     float * get_ez(){return ez;}
@@ -27,7 +24,7 @@ class Lattice{
     int * get_bb(){return bbSpd;}
     // common functions for LBM stream/collide tasks
     void computeMacroscopicData(float& rho,float& ux, float& uy, float& uz);
-    void computeEquilibrium();
+    void computeEquilibrium(float * fEq, const float ux, const float uy, const float uz, const float rho);
     // declarations for lattice variables common to all subclasses
 
 

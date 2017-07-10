@@ -30,7 +30,7 @@ public:
 	float u_bc;
 	float rho_bc;
 	int nodeType;
-	float * f;
+	float * f; // dangerous, but publicly available
 	float * fEq;
 	float * ft;
 

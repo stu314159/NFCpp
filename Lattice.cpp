@@ -3,8 +3,8 @@
 
 Lattice::Lattice(const int Nx, const int Ny, const int Nz):
 Nx(Nx), Ny(Ny), Nz(Nz), numSpd(0),
-ux(0),uy(0),uz(0),rho(0),u_bc(0),rho_bc(0),
-ex(NULL), ey(NULL), ez(NULL),w(NULL), bbSpd(NULL),f(NULL),ft(NULL),fEq(NULL)
+
+ex(NULL), ey(NULL), ez(NULL),w(NULL), bbSpd(NULL)
 {
 
 }
@@ -29,7 +29,7 @@ void Lattice::computeMacroscopicData(float& rho, float& ux, float& uy, float& uz
 
 }
 
-void Lattice::computeEquilibrium()
+void Lattice::computeEquilibrium(float * fEq,const float ux, const float uy, const float uz, const float rho)
 {
 	//this will assume that up-to-date data exists in rho, ux, uy, and uz class variables
 	//and that ex,ey,ez,and w have been updated with the lattice-specific info
