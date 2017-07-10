@@ -1,5 +1,5 @@
 MPI_CC=g++
-MPI_FLAGS= -std=c++11
+MPI_FLAGS= -std=c++11 -g
 
 ifeq ($(PE_ENV),PGI)
 	MPI_FLAGS= -std=c++11
@@ -22,13 +22,14 @@ SOURCES= Lattice.cpp testMain.cpp D3Q15Lattice.cpp D3Q19Lattice.cpp D3Q27Lattice
 OBJECTS= Lattice.o  testMain.o D3Q15Lattice.o D3Q19Lattice.o D3Q27Lattice.o
 LIBS=
 
-TARGET=NFCpp
+TARGET=all
+EX_NAME=NFCpp
 
 %.o:%.cpp
 	$(MPI_CC) $(MPI_FLAGS) -c $^
 
 $(TARGET): $(OBJECTS)
-	$(MPI_CC) $(MPI_FLAGS) -o $@ $^ $(LIBS)
+	$(MPI_CC) $(MPI_FLAGS) -o $(EX_NAME) $^ $(LIBS)
 
 clean:
 	rm -f *.o $(TARGET) *~
