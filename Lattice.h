@@ -25,7 +25,7 @@ class Lattice{
     // common functions for LBM stream/collide tasks
     void computeMacroscopicData(float& rho,float& ux, float& uy, float& uz,
     		                    const float * f);
-    void computeEquilibrium(float * fEq);
+    void computeEquilibrium();
     // declarations for lattice variables common to all subclasses
 
 

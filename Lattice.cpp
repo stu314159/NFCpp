@@ -30,7 +30,7 @@ void Lattice::computeMacroscopicData(float& rho, float& ux, float& uy, float& uz
 
 }
 
-void Lattice::computeEquilibrium(float * fEq)
+void Lattice::computeEquilibrium()
 {
 	//this will assume that up-to-date data exists in rho, ux, uy, and uz class variables
 	//and that ex,ey,ez,and w have been updated with the lattice-specific info
