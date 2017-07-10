@@ -16,6 +16,7 @@ class Lattice{
     void setEz(float * z){ez = z;}
     void setW(float * tw){w = tw;}
     void setBBspd(int* BB){bbSpd = BB;}
+    void setFeq(float * feq){fEq = feq;}
     float * get_ex(){return ex;}
     float * get_ey(){return ey;}
     float * get_ez(){return ez;}
@@ -24,6 +25,7 @@ class Lattice{
     // common functions for LBM stream/collide tasks
     void computeMacroscopicData(float& rho,float& ux, float& uy, float& uz,
     		                    const float * f);
+    void computeEquilibrium(float * fEq);
     // declarations for lattice variables common to all subclasses
 
 
@@ -40,6 +42,7 @@ class Lattice{
     float * ez;
     float * w;
     int * bbSpd;
+    float * fEq;
 
 };
 #endif
