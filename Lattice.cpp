@@ -17,3 +17,18 @@ Lattice::~Lattice()
 
 
 }
+
+void Lattice::computeMacroscopicData(float rho, float ux, float uy, float uz,
+		                             const float * f)
+{
+	rho = 0.; ux = 0.; uy = 0.; uz = 0.;
+	for(int spd = 0; spd<numSpd; spd++)
+	{
+		rho+=f[spd];
+		ux+=ex[spd]*f[spd];
+		uy+=ey[spd]*f[spd];
+		uz+=ez[spd]*f[spd];
+	}
+	ux/=rho; uy/=rho; uz/=rho;
+
+}
