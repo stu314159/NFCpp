@@ -28,6 +28,8 @@ fEq{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 	setW(w);
 	setBBspd(bbSpd);
 	setFeq(fEq);
+	setF(f);
+	setFt(ft);
 
 }
 

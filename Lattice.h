@@ -16,7 +16,9 @@ class Lattice{
     void setEz(float * z){ez = z;}
     void setW(float * tw){w = tw;}
     void setBBspd(int* BB){bbSpd = BB;}
+    void setF(float * fi){f =fi;}
     void setFeq(float * feq){fEq = feq;}
+    void setFt(float * FT){ft = FT;}
     float * get_ex(){return ex;}
     float * get_ey(){return ey;}
     float * get_ez(){return ez;}
@@ -42,6 +44,8 @@ class Lattice{
     float * ez;
     float * w;
     int * bbSpd;
+    float * f;
+    float * ft;
     float * fEq;
 
 };

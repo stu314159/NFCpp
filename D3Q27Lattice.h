@@ -23,6 +23,8 @@ private:
 	float w[numSpd];
 	int bbSpd[numSpd];
 	float fEq[numSpd];
+	float f[numSpd];
+	float ft[numSpd];
 
 };
 

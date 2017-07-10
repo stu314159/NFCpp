@@ -4,7 +4,7 @@
 Lattice::Lattice(const int Nx, const int Ny, const int Nz):
 Nx(Nx), Ny(Ny), Nz(Nz), numSpd(0),
 ux(0),uy(0),uz(0),rho(0),u_bc(0),rho_bc(0),
-ex(NULL), ey(NULL), ez(NULL),w(NULL), bbSpd(NULL),fEq(NULL)
+ex(NULL), ey(NULL), ez(NULL),w(NULL), bbSpd(NULL),f(NULL),ft(NULL),fEq(NULL)
 {
 
 }

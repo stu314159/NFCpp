@@ -17,6 +17,8 @@ class D3Q15Lattice: public Lattice
     float ez[numSpd];
     float w[numSpd];
     int bbSpd[numSpd];
+    float f[numSpd];
+    float ft[numSpd];
     float fEq[numSpd];
 
 };
