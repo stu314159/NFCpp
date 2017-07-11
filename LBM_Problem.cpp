@@ -60,6 +60,8 @@ LBM_Problem::LBM_Problem()
 	// allocate memory for adjacency array
 	adjacency = new int[nnodes*numSpd];
 
+	initializeAdjacency();
+
 	// allocate memory for output data arrays
 	ux = new float[nnodes];
 	uy = new float[nnodes];
@@ -104,6 +106,25 @@ void LBM_Problem::initializeAdjacency()
    float * ey = myLattice->get_ey();
    float * ez = myLattice->get_ez();
    int x,y,z,tx,ty,tz,tgtNd;
+   std::cout << "Initializing adjacency" << std::endl;
+   for(int nd=0;nd<nnodes;nd++)
+   {
+	   for(int spd=0;spd<numSpd;spd++)
+	   {
+		   get_XYZ_gInd(x,y,z,nd); //now x, y, and z are available for nd
+		   tx = x + ex[spd]; ty = y + ey[spd]; tz = z + ez[spd];
+		   if (tx<0)
+			   tx = Nx-1;
+		   if (ty<0)
+			   ty = Ny-1;
+		   if (tz<0)
+			   tz = Nz-1;
+		   tx = tx%Nx; ty=ty%Ny; tz=tz%Nz;
+		   get_gInd_xyz(tgtNd,tx,ty,tz); // get target global node
+		   adjacency[getIdx(nnodes,numSpd,nd,spd)]=tgtNd; // populate the adjacency list
+
+	   }
+   }
 
 
 }
