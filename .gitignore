@@ -4,3 +4,7 @@ NFCpp
 *.cproject
 *.settings/
 *.project
+*.vtk
+*.lbm
+*.mat
+*.pyc
