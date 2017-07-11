@@ -91,6 +91,8 @@ void LBM_Problem::initializeBCarrays()
 	for(int nd=0;nd<numBCnd;nd++)
 	{
 		inl_file >> bc_nd;
+		if(bc_nd > (nnodes-1))
+			throw std::runtime_error("invalid inlet node number read!");
 		inl[bc_nd] = 1;
 
 	}
@@ -105,6 +107,8 @@ void LBM_Problem::initializeBCarrays()
 	for(int nd=0;nd<numBCnd;nd++)
 	{
 		onl_file >> bc_nd;
+		if(bc_nd > (nnodes-1))
+			throw std::runtime_error("invalid outlet node number read!");
 		onl[bc_nd] = 1;
 	}
 	onl_file.close();
@@ -118,6 +122,8 @@ void LBM_Problem::initializeBCarrays()
 	for(int nd=0; nd<numBCnd;nd++)
 	{
 		snl_file >> bc_nd;
+		if(bc_nd > (nnodes-1))
+			throw std::runtime_error("invalid solid node number read!");
 		snl[bc_nd]=1;
 	}
 	snl_file.close();
