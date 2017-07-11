@@ -25,6 +25,7 @@ private:
 	// private methods
 	void readInput();
 	void initializeDensityData();
+	void initializeBCarrays();
 
 	static inline unsigned getIdx(const unsigned nnodes, const unsigned numSpd,
 			unsigned nd, unsigned spd)
@@ -57,6 +58,11 @@ private:
 	// LBM density data arrays
 	float * fEven;
 	float * fOdd;
+
+	// boundary condition arrays
+	int * inl;
+	int * onl;
+	int * snl;
 
 	//input files
 	static const std::string params_file_name;

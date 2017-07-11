@@ -44,14 +44,86 @@ LBM_Problem::LBM_Problem()
 	// initialize fEven and fOdd
 	initializeDensityData();
 
+	// initialize boundary condition arrays
+	inl = new int[nnodes];
+	onl = new int[nnodes];
+	snl = new int[nnodes];
+
+	initializeBCarrays();
+
 }
 
 LBM_Problem::~LBM_Problem()
 {
+	std::cout << "entering destructor..." << std::endl;
 
+	std::cout << "destroying my lattice..." << std::endl;
 	delete myLattice;
+
+	std::cout << "destroying fEven and fOdd..." << std::endl;
 	delete [] fEven;
 	delete [] fOdd;
+
+	std::cout << "destroying boundary data arrays..." << std::endl;
+	std::cout << "inl..." << std::endl;
+	delete [] inl;
+	std::cout << "onl..." << std::endl;
+	delete [] onl;
+	std::cout << "snl..." << std::endl;
+	delete [] snl;
+}
+
+void LBM_Problem::initializeBCarrays()
+{
+	// initialize all arrays to zer
+	for(int nd=0;nd<nnodes; nd++)
+	{
+		inl[nd]=0; onl[nd]=0; snl[nd] = 0;
+	}
+
+
+	int bc_nd; int numBCnd;
+	// inlet node lists
+	std::ifstream inl_file(inl_file_name.c_str(),std::ios::in);
+	if(!inl_file.is_open())
+		throw std::runtime_error("Could not open inlet node list file!");
+	inl_file >> numBCnd;
+	for(int nd=0;nd<numBCnd;nd++)
+	{
+		inl_file >> bc_nd;
+		inl[bc_nd] = 1;
+
+	}
+	inl_file.close();
+
+
+	// outlet node list
+	std::ifstream onl_file(onl_file_name.c_str(),std::ios::in);
+	if(!onl_file.is_open())
+		throw std::runtime_error("Could not open outlet node list file!");
+	onl_file >> numBCnd;
+	for(int nd=0;nd<numBCnd;nd++)
+	{
+		onl_file >> bc_nd;
+		onl[bc_nd] = 1;
+	}
+	onl_file.close();
+
+
+	// solid node list
+	std::ifstream snl_file(snl_file_name.c_str(),std::ios::in);
+	if(!snl_file.is_open())
+		throw std::runtime_error("Cound not open solid node list file!");
+	snl_file >> numBCnd;
+	for(int nd=0; nd<numBCnd;nd++)
+	{
+		snl_file >> bc_nd;
+		snl[bc_nd]=1;
+	}
+	snl_file.close();
+
+
+
 }
 
 void LBM_Problem::initializeDensityData()
