@@ -18,8 +18,10 @@ endif
 
 
 
-SOURCES= Lattice.cpp testMain.cpp D3Q15Lattice.cpp D3Q19Lattice.cpp D3Q27Lattice.cpp LBM_DataHandler.cpp
-OBJECTS= Lattice.o  testMain.o D3Q15Lattice.o D3Q19Lattice.o D3Q27Lattice.o LBM_DataHandler.o
+SOURCES= Lattice.cpp testMain.cpp D3Q15Lattice.cpp D3Q19Lattice.cpp D3Q27Lattice.cpp \
+	LBM_DataHandler.cpp LBM_Problem.cpp
+OBJECTS= Lattice.o  testMain.o D3Q15Lattice.o D3Q19Lattice.o D3Q27Lattice.o \
+	LBM_DataHandler.o LBM_Problem.o
 LIBS=
 
 TARGET=all
