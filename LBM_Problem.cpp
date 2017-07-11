@@ -41,6 +41,9 @@ LBM_Problem::LBM_Problem()
 	fEven = new float[nnodes*numSpd];
 	fOdd = new float[nnodes*numSpd];
 
+	// initialize fEven and fOdd
+	initializeDensityData();
+
 }
 
 LBM_Problem::~LBM_Problem()
@@ -51,7 +54,18 @@ LBM_Problem::~LBM_Problem()
 	delete [] fOdd;
 }
 
-
+void LBM_Problem::initializeDensityData()
+{
+	float * w = myLattice->get_w();
+	for(int nd=0;nd<nnodes;nd++)
+	{
+		for(int spd=0;spd<numSpd;spd++)
+		{
+			fEven[getIdx(nnodes,numSpd,nd,spd)]=rho_lbm*w[spd];
+			fOdd[getIdx(nnodes,numSpd,nd,spd)]=rho_lbm*w[spd];
+		}
+	}
+}
 
 void LBM_Problem::readInput()
 {

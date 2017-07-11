@@ -1,5 +1,11 @@
 #!/bin/bash
 # $1 - lattice type
+# 
+# 1 = D3Q15  
+# 2 = D3Q19 
+# 3 = D3Q27
+#
+
 
 # pre-process
 python ./NFCpp_preprocess.py

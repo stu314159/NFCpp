@@ -20,7 +20,7 @@ class Lattice{
     float * get_ex(){return ex;}
     float * get_ey(){return ey;}
     float * get_ez(){return ez;}
-    float * get_w(){return ez;}
+    float * get_w(){return w;}
     int * get_bb(){return bbSpd;}
     // common functions for LBM stream/collide tasks
     void computeMacroscopicData(float& rho,float& ux, float& uy, float& uz, const float * f);

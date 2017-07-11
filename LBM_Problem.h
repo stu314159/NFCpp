@@ -24,6 +24,14 @@ public:
 private:
 	// private methods
 	void readInput();
+	void initializeDensityData();
+
+	static inline unsigned getIdx(const unsigned nnodes, const unsigned numSpd,
+			unsigned nd, unsigned spd)
+	{
+		//return spd*nnodes+nd; // for nd sequential
+		return  nd*numSpd+spd; // for spd sequential
+	}
 
 	// data members to be read from the input file
 	int lattice_type;
