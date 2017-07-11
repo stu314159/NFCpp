@@ -8,6 +8,8 @@
 #ifndef LBM_PROBLEM_H_
 #define LBM_PROBLEM_H_
 
+#include <string>
+
 class LBM_Problem
 {
 public:
@@ -15,7 +17,10 @@ public:
 	~LBM_Problem();
 
 private:
+	// private methods
+	void readInput();
 	// data members to be read from the input file
+	std::string lattice_type;
 	int Num_ts;
 	int ts_rep_freq;
 	int Warmup_ts;
@@ -33,6 +38,12 @@ private:
 	// LBM density data arrays
 	float * fEven;
 	float * fOdd;
+
+	//input files
+	static const std::string params_file_name;
+	static const std::string inl_file_name;
+	static const std::string onl_file_name;
+	static const std::string snl_file_name;
 
 };
 
