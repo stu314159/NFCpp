@@ -11,7 +11,7 @@
 python ./NFCpp_preprocess.py
 
 # input
-python ./genInput.py sphere.mat $1 12 1 0 10 10 1e-2 0 0
+python ./genInput.py sphere.mat $1 12 1 0 3 10 1e-2 0 0
 
 # run the code
 ./NFCpp

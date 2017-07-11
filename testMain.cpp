@@ -38,6 +38,7 @@ int main(int argc, char * argv[]){
 		if(((ts+1)%plot_freq)==0)
 		{
 			std::cout << "Outputting data for time step " << ts+1 << std::endl;
+			myLBM.write_Data(ts%2);
 		}
 
 
