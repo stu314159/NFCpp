@@ -36,8 +36,6 @@ LBM_Problem::LBM_Problem()
 	nnodes = Nx*Ny*Nz;
 	numSpd = myLattice->getNumSpd();
 
-	std::cout << "There are " << nnodes << " nodes, and " << numSpd <<" speeds per node."
-			<< std::endl;
 	fEven = new float[nnodes*numSpd];
 	fOdd = new float[nnodes*numSpd];
 
@@ -55,21 +53,12 @@ LBM_Problem::LBM_Problem()
 
 LBM_Problem::~LBM_Problem()
 {
-	std::cout << "entering destructor..." << std::endl;
 
-	std::cout << "destroying my lattice..." << std::endl;
 	delete myLattice;
-
-	std::cout << "destroying fEven and fOdd..." << std::endl;
 	delete [] fEven;
 	delete [] fOdd;
-
-	std::cout << "destroying boundary data arrays..." << std::endl;
-	std::cout << "inl..." << std::endl;
 	delete [] inl;
-	std::cout << "onl..." << std::endl;
 	delete [] onl;
-	std::cout << "snl..." << std::endl;
 	delete [] snl;
 }
 
