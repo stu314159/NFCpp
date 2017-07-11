@@ -19,8 +19,29 @@ int main(int argc, char * argv[]){
 
 	LBM_Problem myLBM = LBM_Problem();
 	int Num_Ts = myLBM.get_NumTs();
+	int ts_rep_freq = myLBM.get_tsRepFreq();
+	int plot_freq = myLBM.get_plotFreq();
 	std::cout << "Commencing LBM simulation with " << Num_Ts <<
 			" time steps." << std::endl;
+
+	for(int ts = 0; ts<Num_Ts; ts++)
+	{
+		if(((ts+1)%ts_rep_freq)==0)
+		{
+			std::cout << "Executing time step " << ts+1 << std::endl;
+		}
+
+		// do lattice Boltzmann time step calculations
+
+
+
+		if(((ts+1)%plot_freq)==0)
+		{
+			std::cout << "Outputting data for time step " << ts+1 << std::endl;
+		}
+
+
+	}
 
 	std::cout << "everything done" << std::endl;
 	return 0;

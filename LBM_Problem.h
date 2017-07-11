@@ -21,6 +21,8 @@ public:
 	LBM_Problem();
 	~LBM_Problem();
 	int get_NumTs(){return Num_ts;};
+	int get_tsRepFreq(){return ts_rep_freq;};
+	int get_plotFreq(){return plot_freq;};
 
 private:
 	// private methods
