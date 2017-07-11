@@ -23,6 +23,8 @@ public:
 	int get_NumTs(){return Num_ts;};
 	int get_tsRepFreq(){return ts_rep_freq;};
 	int get_plotFreq(){return plot_freq;};
+	void do_TimeStep(bool isEven);
+	void write_Data(bool isEven);
 
 private:
 	// private methods
@@ -61,6 +63,8 @@ private:
 	// LBM density data arrays
 	float * fEven;
 	float * fOdd;
+	float * fIn;
+	float * fOut;
 
 	// boundary condition arrays
 	int * inl;
@@ -72,6 +76,20 @@ private:
 	static const std::string inl_file_name;
 	static const std::string onl_file_name;
 	static const std::string snl_file_name;
+
+	//output file name stubs
+	static const std::string ux_stub;
+	static const std::string uy_stub;
+	static const std::string uz_stub;
+	static const std::string density_stub;
+	static const std::string suffix;
+	static int dumpCounter;
+
+	// output data areas:
+	float * ux;
+	float * uy;
+	float * uz;
+	float * rho;
 
 };
 

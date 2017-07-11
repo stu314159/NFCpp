@@ -10,11 +10,19 @@
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
+#include <sstream>
 
 const std::string LBM_Problem::params_file_name="params.lbm";
 const std::string LBM_Problem::snl_file_name="snl.lbm";
 const std::string LBM_Problem::inl_file_name="inl.lbm";
 const std::string LBM_Problem::onl_file_name="onl.lbm";
+
+const std::string LBM_Problem::ux_stub="ux";
+const std::string LBM_Problem::uy_stub="uy";
+const std::string LBM_Problem::uz_stub="uz";
+const std::string LBM_Problem::density_stub="density";
+const std::string LBM_Problem::suffix=".b_dat";
+int LBM_Problem::dumpCounter = 0;
 
 LBM_Problem::LBM_Problem()
 {
@@ -49,6 +57,7 @@ LBM_Problem::LBM_Problem()
 	// initialize boundary condition arrays
 	initializeBCarrays();
 
+
 }
 
 LBM_Problem::~LBM_Problem()
@@ -62,7 +71,77 @@ LBM_Problem::~LBM_Problem()
 	delete [] snl;
 }
 
+void LBM_Problem::do_TimeStep(bool isEven)
+{
+	//assign fIn and fOut pointers
+	if (isEven) //for even time step, fEven holds up-to-date info at beginning of step
+	{
+		fIn = fEven; fOut = fOdd;
+	}else{ // for odd time steps, fOdd holds up-to-date info at beginning of step
+		fIn = fOdd; fOut = fEven;
+	}
 
+
+}
+
+void LBM_Problem::write_Data(bool isEven)
+{
+	// write_Data only at the end of a time step.
+	float * fOutput;
+	float fBuff[numSpd];
+	float ux_nd, uy_nd, uz_nd, rho_nd;
+	std::stringstream ts_ind;
+	std::string density_fn, ux_fn, uy_fn, uz_fn;
+	if (isEven)
+	{
+		fOutput = fOdd; //at end of an Even time step, fOdd is up to date.
+	}else
+	{
+		fOutput = fEven; //at end of an Odd time step, fEven is up to date.
+	}
+	//loop through all lattice points (I own them after all)
+	for(int nd=0;nd<nnodes;nd++)
+	{
+		// package up density distribution data for each lattice point in turn
+		for(int spd=0;spd<numSpd;spd++)
+		{
+			fBuff[spd]=fOutput[getIdx(nnodes,numSpd,nd,spd)];
+		}
+
+		// pass to lattice object to compute ux,uy,uz, and rho
+		myLattice->computeMacroscopicData(rho_nd,ux_nd,uy_nd,uz_nd,fBuff);
+
+		// package ux,uy,uz, and rho into output buffers
+		ux[nd]=ux_nd; uy[nd]=uy_nd; uz[nd]=uz_nd; rho[nd]=rho_nd;
+
+	}
+
+	// write output buffer to binary file
+	// generate current dump file names
+	ts_ind << dumpCounter;
+	density_fn = density_stub+ts_ind.str()+suffix;
+	ux_fn = ux_stub+ts_ind.str()+suffix;
+	uy_fn = uy_stub+ts_ind.str()+suffix;
+	uz_fn = uz_stub+ts_ind.str()+suffix;
+	std::ofstream uxFile(ux_fn.c_str(),std::ios::out | std::ios::binary);
+	uxFile.write((const char *)ux,nnodes*sizeof(float));
+	uxFile.close();
+
+	std::ofstream uyFile(uy_fn.c_str(),std::ios::out | std::ios::binary);
+	uyFile.write((const char *)uy,nnodes*sizeof(float));
+	uyFile.close();
+
+	std::ofstream uzFile(uz_fn.c_str(),std::ios::out | std::ios::binary);
+	uzFile.write((const char*)uz,nnodes*sizeof(float));
+	uzFile.close();
+
+	std::ofstream rhoFile(density_fn.c_str(),std::ios::out | std::ios::binary);
+	rhoFile.write((const char*)rho,nnodes*sizeof(float));
+	rhoFile.close();
+
+	// after data is written:
+	dumpCounter+=1;
+}
 void LBM_Problem::initializeBCarrays()
 {
 	// initialize all arrays to zer
