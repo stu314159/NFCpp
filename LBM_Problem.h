@@ -9,6 +9,11 @@
 #define LBM_PROBLEM_H_
 
 #include <string>
+#include "Lattice.h"
+#include "LBM_Problem.h"
+#include "D3Q15Lattice.h"
+#include "D3Q19Lattice.h"
+#include "D3Q27Lattice.h"
 
 class LBM_Problem
 {
@@ -19,8 +24,9 @@ public:
 private:
 	// private methods
 	void readInput();
+
 	// data members to be read from the input file
-	std::string lattice_type;
+	int lattice_type;
 	int Num_ts;
 	int ts_rep_freq;
 	int Warmup_ts;
@@ -34,6 +40,11 @@ private:
 	float Lx_p;
 	float Ly_p;
 	float Lz_p;
+	int nnodes;
+	int numSpd;
+
+	//Lattice data structure
+	Lattice * myLattice;
 
 	// LBM density data arrays
 	float * fEven;
