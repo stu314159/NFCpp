@@ -1,6 +1,6 @@
-#pyNFC_preprocess.py
+#NFCpp_preprocess.py
 """
-pre-processor file for pyNFC2.  Define geometry and discretization parameters
+pre-processor file for NFCpp.  Define geometry and discretization parameters
 
 """
 
