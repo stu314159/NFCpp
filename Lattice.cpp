@@ -4,7 +4,7 @@
 Lattice::Lattice(const int Nx, const int Ny, const int Nz):
 Nx(Nx), Ny(Ny), Nz(Nz), numSpd(0),
 
-ex(NULL), ey(NULL), ez(NULL),w(NULL), bbSpd(NULL)
+ex(NULL), ey(NULL), ez(NULL),w(NULL), bbSpd(NULL), Qflat(NULL)
 {
 
 }
@@ -15,7 +15,7 @@ Lattice::~Lattice()
 
 }
 
-void Lattice::computeMacroscopicData(float& rho, float& ux, float& uy, float& uz)
+void Lattice::computeMacroscopicData(float& rho, float& ux, float& uy, float& uz, const float* f)
 {
 	rho = 0.; ux = 0.; uy = 0.; uz = 0.;
 	for(int spd = 0; spd<numSpd; spd++)
@@ -40,5 +40,16 @@ void Lattice::computeEquilibrium(float * fEq,const float ux, const float uy, con
 		cu = 3.f*(ex[spd]*ux+ey[spd]*uy+ez[spd]*uz);
 		fEq[spd]=w[spd]*rho*(1.f+cu+0.5f*(cu*cu)-3.f/2.f*(ux*ux+uy*uy+uz*uz));
 
+	}
+}
+
+void Lattice::setQflat(float * Qflat)
+{
+	for (int spd=0;spd<numSpd;spd++)
+	{
+		for (int i=0;i<9;i++)
+		{
+			//Qflat[i+spd*numSpd]=
+		}
 	}
 }

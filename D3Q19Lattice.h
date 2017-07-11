@@ -24,6 +24,7 @@ private:
 	float ez[numSpd];
 	float w[numSpd];
 	int bbSpd[numSpd];
+	float Qflat[numSpd*9];
 
 };
 
