@@ -16,16 +16,11 @@
 int main(int argc, char * argv[]){
 
 	std::cout << "Hello test main!" << std::endl;
-	D3Q15Lattice d15 = D3Q15Lattice(10,10,10);
-	D3Q19Lattice d19 = D3Q19Lattice(10,10,10);
-	D3Q27Lattice d27 = D3Q27Lattice(10,10,10);
-
-
-	std::cout << "d15 numSpd = " << d15.getNumSpd() << std::endl;
-	std::cout << "d19 numSpd = " << d19.getNumSpd() << std::endl;
-	std::cout << "d27 numSpd = " << d27.getNumSpd() << std::endl;
 
 	LBM_Problem myLBM = LBM_Problem();
+	int Num_Ts = myLBM.get_NumTs();
+	std::cout << "Commencing LBM simulation with " << Num_Ts <<
+			" time steps." << std::endl;
 
 	std::cout << "everything done" << std::endl;
 	return 0;

@@ -20,6 +20,7 @@ class LBM_Problem
 public:
 	LBM_Problem();
 	~LBM_Problem();
+	int get_NumTs(){return Num_ts;};
 
 private:
 	// private methods

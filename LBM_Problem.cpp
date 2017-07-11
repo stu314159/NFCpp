@@ -42,11 +42,11 @@ LBM_Problem::LBM_Problem()
 	// initialize fEven and fOdd
 	initializeDensityData();
 
-	// initialize boundary condition arrays
+	// allocate memory for boundary condition arrays
 	inl = new int[nnodes];
 	onl = new int[nnodes];
 	snl = new int[nnodes];
-
+	// initialize boundary condition arrays
 	initializeBCarrays();
 
 }
@@ -61,6 +61,7 @@ LBM_Problem::~LBM_Problem()
 	delete [] onl;
 	delete [] snl;
 }
+
 
 void LBM_Problem::initializeBCarrays()
 {
