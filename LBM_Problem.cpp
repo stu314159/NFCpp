@@ -57,6 +57,12 @@ LBM_Problem::LBM_Problem()
 	// initialize boundary condition arrays
 	initializeBCarrays();
 
+	// allocate memory for output data arrays
+	ux = new float[nnodes];
+	uy = new float[nnodes];
+	uz = new float[nnodes];
+	rho = new float[nnodes];
+
 
 }
 
@@ -69,6 +75,10 @@ LBM_Problem::~LBM_Problem()
 	delete [] inl;
 	delete [] onl;
 	delete [] snl;
+	delete [] ux;
+	delete [] uy;
+	delete [] uz;
+	delete [] rho;
 }
 
 void LBM_Problem::do_TimeStep(bool isEven)
