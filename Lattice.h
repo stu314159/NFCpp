@@ -22,7 +22,6 @@ class Lattice{
     float * get_ez(){return ez;}
     float * get_w(){return ez;}
     int * get_bb(){return bbSpd;}
-    void setQflat(float * Qflat);
     // common functions for LBM stream/collide tasks
     void computeMacroscopicData(float& rho,float& ux, float& uy, float& uz, const float * f);
     void computeEquilibrium(float * fEq, const float ux, const float uy, const float uz, const float rho);

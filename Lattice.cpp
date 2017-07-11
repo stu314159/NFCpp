@@ -43,13 +43,4 @@ void Lattice::computeEquilibrium(float * fEq,const float ux, const float uy, con
 	}
 }
 
-void Lattice::setQflat(float * Qflat)
-{
-	for (int spd=0;spd<numSpd;spd++)
-	{
-		for (int i=0;i<9;i++)
-		{
-			//Qflat[i+spd*numSpd]=
-		}
-	}
-}
+
