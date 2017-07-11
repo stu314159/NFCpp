@@ -31,6 +31,9 @@ private:
 	void readInput();
 	void initializeDensityData();
 	void initializeBCarrays();
+	void initializeAdjacency();
+	void get_XYZ_gInd(int& x, int& y, int& z, const int gInd);
+	void get_gInd_xyz(int& gInd, const int x, const int y, const int z);
 
 	static inline unsigned getIdx(const unsigned nnodes, const unsigned numSpd,
 			unsigned nd, unsigned spd)
@@ -70,6 +73,9 @@ private:
 	int * inl;
 	int * onl;
 	int * snl;
+
+	// adjacency array (use getIdx inline to address just like fEven and fOdd
+	int * adjacency;
 
 	//input files
 	static const std::string params_file_name;

@@ -57,6 +57,9 @@ LBM_Problem::LBM_Problem()
 	// initialize boundary condition arrays
 	initializeBCarrays();
 
+	// allocate memory for adjacency array
+	adjacency = new int[nnodes*numSpd];
+
 	// allocate memory for output data arrays
 	ux = new float[nnodes];
 	uy = new float[nnodes];
@@ -75,12 +78,35 @@ LBM_Problem::~LBM_Problem()
 	delete [] inl;
 	delete [] onl;
 	delete [] snl;
+	delete [] adjacency;
 	delete [] ux;
 	delete [] uy;
 	delete [] uz;
 	delete [] rho;
 }
 
+void LBM_Problem::get_XYZ_gInd(int& x, int& y, int& z, const int gInd)
+{
+	//given global index number, return the x, y, and z coordinates.
+	z = gInd/(Nx*Ny);
+	y = (gInd - z*Nx*Ny)/Nx;
+	x = (gInd - z*Nx*Ny - y*Nx);
+}
+
+void LBM_Problem::get_gInd_xyz(int& gInd, const int x, const int y, const int z)
+{
+	gInd = x+y*Nx + z*Nx*Ny;
+}
+
+void LBM_Problem::initializeAdjacency()
+{
+   float * ex = myLattice->get_ex();
+   float * ey = myLattice->get_ey();
+   float * ez = myLattice->get_ez();
+   int x,y,z,tx,ty,tz,tgtNd;
+
+
+}
 void LBM_Problem::do_TimeStep(bool isEven)
 {
 	//assign fIn and fOut pointers
@@ -196,7 +222,7 @@ void LBM_Problem::initializeBCarrays()
 	// solid node list
 	std::ifstream snl_file(snl_file_name.c_str(),std::ios::in);
 	if(!snl_file.is_open())
-		throw std::runtime_error("Cound not open solid node list file!");
+		throw std::runtime_error("Could not open solid node list file!");
 	snl_file >> numBCnd;
 	for(int nd=0; nd<numBCnd;nd++)
 	{
