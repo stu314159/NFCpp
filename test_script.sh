@@ -8,7 +8,7 @@ python ./NFCpp_preprocess.py
 python ./genInput.py sphere.mat $1 12 1 0 10 10 1e-2 0 0
 
 # run the code
-#./NFCpp
+./NFCpp
 
 # gold standard is set on output from 10th time step
 #python ./validate.py 1

@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "Lattice.h"
+#include "LBM_Problem.h"
 #include "D3Q15Lattice.h"
 #include "D3Q19Lattice.h"
 #include "D3Q27Lattice.h"
@@ -23,6 +24,8 @@ int main(int argc, char * argv[]){
 	std::cout << "d15 numSpd = " << d15.getNumSpd() << std::endl;
 	std::cout << "d19 numSpd = " << d19.getNumSpd() << std::endl;
 	std::cout << "d27 numSpd = " << d27.getNumSpd() << std::endl;
+
+	LBM_Problem myLBM = LBM_Problem();
 
 	std::cout << "everything done" << std::endl;
 	return 0;
