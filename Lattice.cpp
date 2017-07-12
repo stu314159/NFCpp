@@ -15,6 +15,19 @@ Lattice::~Lattice()
 
 }
 
+void Lattice::bounceBack(LBM_DataHandler& f)
+{
+	float fTmp[numSpd];
+	for(int spd=0;spd<numSpd;spd++)
+	{
+		fTmp[spd]=f.f[bbSpd[spd]];
+	}
+	for(int spd=0;spd<numSpd;spd++)
+	{
+		f.f[spd]=fTmp[spd];
+	}
+
+}
 void Lattice::computeMacroscopicData(float& rho, float& ux, float& uy, float& uz, const float* f)
 {
 	rho = 0.; ux = 0.; uy = 0.; uz = 0.;
@@ -45,7 +58,25 @@ void Lattice::computeEquilibrium(float * fEq,const float ux, const float uy, con
 
 void Lattice::computeFout(LBM_DataHandler& f)
 {
-	// do steps to calculate fOut and put it into f.f field
+	// node type 1: just bounce back
+	if (f.nodeType==1)
+	{
+		// just bounce back
+		bounceBack(f);
+
+	}else
+	{
+		// node type 0, 2, and 3 continue with the following steps:
+
+		// compute macroscopic velocity and pressure
+
+		// node type 2 and 3 apply macroscopic boundary conditions
+
+		// compute equilibrium
+
+		// node type 2 and 3 apply microscopic boundary conditions and regularization
+	}
+
 
 
 }

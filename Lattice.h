@@ -28,6 +28,7 @@ class Lattice{
     void computeMacroscopicData(float& rho,float& ux, float& uy, float& uz, const float * f);
     void computeEquilibrium(float * fEq, const float ux, const float uy, const float uz, const float rho);
     void computeFout(LBM_DataHandler& f);
+    void bounceBack(LBM_DataHandler& f);
     // declarations for lattice variables common to all subclasses
 
 
