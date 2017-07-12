@@ -165,8 +165,8 @@ void Lattice::computeFout(LBM_DataHandler& f)
 	}
 
 	// get (flattened) second-order moment of particle density distribution
-	compute_piFlat(f);
-	regularize(f);
+	//compute_piFlat(f);
+	//regularize(f);
 	relax(f);
 
 }

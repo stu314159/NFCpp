@@ -76,6 +76,7 @@ void D3Q27Lattice::set_inlet_bc_micro(LBM_DataHandler& f)
 void D3Q27Lattice::set_inlet_bc_macro(LBM_DataHandler& f)
 {
 	f.uz = f.u_bc;
+	f.ux = 0; f.uy = 0.;
 	f.rho = (1./(1. - f.uz))*(2.*(f.f[3]+f.f[6]+f.f[8]+
 			f.f[10]+f.f[12]+f.f[20]+f.f[22]+f.f[24]+f.f[26])+
 			(f.f[0]+f.f[1]+f.f[2]+f.f[4]+f.f[5]+

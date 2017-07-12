@@ -66,6 +66,7 @@ void D3Q19Lattice::set_inlet_bc_micro(LBM_DataHandler& f)
 void D3Q19Lattice::set_inlet_bc_macro(LBM_DataHandler& f)
 {
 	f.uz = f.u_bc;
+	f.ux = 0.; f.uy = 0.;
 	f.rho = (1./(1.-f.uz))*(2.*(f.f[6]+f.f[13]+f.f[14]+
 			f.f[17]+f.f[18])+
 			(f.f[0]+f.f[1]+f.f[2]+f.f[3]+f.f[4]+
