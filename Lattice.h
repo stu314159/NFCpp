@@ -31,6 +31,7 @@ class Lattice{
     void computeFout(LBM_DataHandler& f);
     void computeEquilibrium(LBM_DataHandler& f);
     void bounceBack(LBM_DataHandler& f);
+    void compute_piFlat(LBM_DataHandler& f);
 
     virtual void set_inlet_bc_micro(LBM_DataHandler& f) = 0;
     virtual void set_inlet_bc_macro(LBM_DataHandler& f) = 0;

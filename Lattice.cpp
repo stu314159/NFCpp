@@ -80,6 +80,26 @@ void Lattice::computeEquilibrium(LBM_DataHandler& f)
 	float rho = f.rho;
 	computeEquilibrium(fEq,ux,uy,uz,rho);
 }
+
+void Lattice::compute_piFlat(LBM_DataHandler& f)
+{
+	float qP[9];
+	f.piFlat = {0,0,0,0,0,0,0,0,0}; // initialize
+	for(int spd = 0; spd<numSpd; spd++)
+	{
+		f.piFlat[0]+=ex[spd]*ex[spd]*f.f[spd];
+		f.piFlat[1]+=ey[spd]*ex[spd]*f.f[spd];
+		f.piFlat[2]+=ez[spd]*ez[spd]*f.f[spd];
+		f.piFlat[3]+=ex[spd]*ey[spd]*f.f[spd];
+		f.piFlat[4]+=ey[spd]*ey[spd]*f.f[spd];
+		f.piFlat[5]+=ez[spd]*ey[spd]*f.f[spd];
+		f.piFlat[6]+=ex[spd]*ez[spd]*f.f[spd];
+		f.piFlat[7]+=ey[spd]*ez[spd]*f.f[spd];
+		f.piFlat[8]+=ez[spd]*ez[spd]*f.f[spd];
+
+	}
+}
+
 void Lattice::computeFout(LBM_DataHandler& f)
 {
 	// node type 1: just bounce back
@@ -117,6 +137,9 @@ void Lattice::computeFout(LBM_DataHandler& f)
 		{
 			set_outlet_bc_micro(f);
 		}
+
+		// get (flattened) second-order moment of particle density distribution
+		compute_piFlat(f);
 
 
 
