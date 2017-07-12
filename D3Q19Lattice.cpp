@@ -44,6 +44,7 @@ Qflat{-1./3.,0,0,0,-1./3.,0,0,0,-1./3.,
 	setEz(ez);
 	setW(w);
 	setBBspd(bbSpd);
+	setQflat(Qflat);
 }
 
 D3Q19Lattice::~D3Q19Lattice()

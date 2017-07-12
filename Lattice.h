@@ -18,6 +18,7 @@ class Lattice{
     void setEz(float * z){ez = z;}
     void setW(float * tw){w = tw;}
     void setBBspd(int* BB){bbSpd = BB;}
+    void setQflat(float * Qf){Qflat = Qf;}
    // void loadF(const int idx, const float val){f[idx]=val;} //<-- ?? consider changing this in light of LDH
     float * get_ex(){return ex;}
     float * get_ey(){return ey;}

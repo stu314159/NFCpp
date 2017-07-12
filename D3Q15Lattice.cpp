@@ -34,6 +34,7 @@ Qflat{1./3.,0.,0.,0,-1./3.,0,0,0,-1./3.,  //this is embarrassing, but better tha
 	setEz(ez);
 	setW(w);
 	setBBspd(bbSpd);
+	setQflat(Qflat);
 
 }
 

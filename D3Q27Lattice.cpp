@@ -53,6 +53,7 @@ Qflat{-1./3.,0,0,0,-1./3.,0,0,0,-1./3., // 0
 	setEz(ez);
 	setW(w);
 	setBBspd(bbSpd);
+	setQflat(Qflat);
 
 }
 
