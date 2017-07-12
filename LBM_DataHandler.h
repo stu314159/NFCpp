@@ -30,10 +30,12 @@ public:
 	float u_bc;
 	float rho_bc;
 	int nodeType;
+	float omega;
 	float * f; // dangerous, but publicly available
 	float * fEq;
-	float * ft;
+	float * fOut;
 	float piFlat[9];
+
 
 private:
 	const int numSpd;

@@ -118,6 +118,14 @@ void Lattice::regularize(LBM_DataHandler& f)
 	}
 }
 
+void Lattice::relax(LBM_DataHandler& f)
+{
+	for(int spd=0;spd<numSpd;spd++)
+	{
+		f.fOut[spd]=f.f[spd]-f.omega*(f.f[spd] - f.fEq[spd]);
+	}
+
+}
 
 void Lattice::computeFout(LBM_DataHandler& f)
 {
@@ -160,9 +168,6 @@ void Lattice::computeFout(LBM_DataHandler& f)
 		// get (flattened) second-order moment of particle density distribution
 		compute_piFlat(f);
 		regularize(f);
-
-
-
 
 
 	}

@@ -164,13 +164,15 @@ void LBM_Problem::do_TimeStep(bool isEven)
 		{
 			fData.nodeType = 0; // regular fluid node
 		}
+		// set omega
+		fData.omega = omega;
 		// send data to Lattice object to calculate fOut.
 		myLattice->computeFout(fData);
 
 		// stream data to appropriate location in fOut
 		for(int spd=0;spd<numSpd;spd++)
 		{	int tgtNd = adjacency[getIdx(nnodes,numSpd,nd,spd)];
-			fOut[getIdx(nnodes,numSpd,tgtNd,spd)] = fData.f[spd];
+			fOut[getIdx(nnodes,numSpd,tgtNd,spd)] = fData.fOut[spd];
 		}
 
 	}
