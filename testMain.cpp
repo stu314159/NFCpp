@@ -37,8 +37,7 @@ int main(int argc, char * argv[]){
 		}
 
 		// do lattice Boltzmann time step calculations
-
-
+		myLBM.do_TimeStep(ts%2==0);
 
 		if(((ts+1)%plot_freq)==0)
 		{

@@ -1,5 +1,6 @@
 #include "Lattice.h"
 #include <cstdlib>
+#include <iostream> //<-- used for debugging
 
 Lattice::Lattice(const int Nx, const int Ny, const int Nz):
 Nx(Nx), Ny(Ny), Nz(Nz), numSpd(0),
@@ -43,10 +44,11 @@ void Lattice::computeMacroscopicData(float& rho, float& ux, float& uy, float& uz
 }
 void Lattice::computeMacroscopicData(LBM_DataHandler& f)
 {
-	int rho, ux, uy, uz;
+	float rho, ux, uy, uz;
 	rho = 0.; ux = 0.; uy = 0.; uz = 0.;
 	for(int spd = 0; spd<numSpd; spd++)
 	{
+
 		rho+=f.f[spd];
 		ux+=ex[spd]*f.f[spd];
 		uy+=ey[spd]*f.f[spd];

@@ -56,6 +56,7 @@ void D3Q15Lattice::set_inlet_bc_micro(LBM_DataHandler& f)
 
 void D3Q15Lattice::set_inlet_bc_macro(LBM_DataHandler& f)
 {
+	f.uz = f.u_bc;
 	f.rho = (1./(1. - f.uz))*(2.*
 			(f.f[6]+f.f[11]+f.f[12]+f.f[13]+f.f[14])+
 			(f.f[0]+f.f[1]+f.f[2]+f.f[3]+f.f[4]));
@@ -74,6 +75,7 @@ void D3Q15Lattice::set_outlet_bc_micro(LBM_DataHandler& f)
 
 void D3Q15Lattice::set_outlet_bc_macro(LBM_DataHandler& f)
 {
+	f.rho = f.rho_bc;
 	f.uz = -1. + (1./f.rho)*
 			(2.*(f.f[5]+f.f[7]+f.f[8]+f.f[9]+f.f[10])+
 					(f.f[0]+f.f[1]+f.f[2]+f.f[3]+f.f[4]));
