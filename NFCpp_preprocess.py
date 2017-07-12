@@ -16,7 +16,7 @@ s_y = 0.5
 s_z = 2.0
 
 r_s = 0.25
-N_divs = 7
+N_divs = 14
 
 geom_file_stub = 'sphere'
 sphereObst = fc.SphereObstruction(r_s,s_x,s_y,s_z)

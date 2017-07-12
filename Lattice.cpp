@@ -87,17 +87,19 @@ void Lattice::compute_piFlat(LBM_DataHandler& f)
 	{
 		f.piFlat[k]=0.;
 	}
+	float fNeq;
 	for(int spd = 0; spd<numSpd; spd++)
 	{
-		f.piFlat[0]+=ex[spd]*ex[spd]*f.f[spd];
-		f.piFlat[1]+=ey[spd]*ex[spd]*f.f[spd];
-		f.piFlat[2]+=ez[spd]*ex[spd]*f.f[spd];
-		f.piFlat[3]+=ex[spd]*ey[spd]*f.f[spd];
-		f.piFlat[4]+=ey[spd]*ey[spd]*f.f[spd];
-		f.piFlat[5]+=ez[spd]*ey[spd]*f.f[spd];
-		f.piFlat[6]+=ex[spd]*ez[spd]*f.f[spd];
-		f.piFlat[7]+=ey[spd]*ez[spd]*f.f[spd];
-		f.piFlat[8]+=ez[spd]*ez[spd]*f.f[spd];
+		fNeq = f.f[spd] - f.fEq[spd];
+		f.piFlat[0]+=ex[spd]*ex[spd]*fNeq;
+		f.piFlat[1]+=ey[spd]*ex[spd]*fNeq;
+		f.piFlat[2]+=ez[spd]*ex[spd]*fNeq;
+		f.piFlat[3]+=ex[spd]*ey[spd]*fNeq;
+		f.piFlat[4]+=ey[spd]*ey[spd]*fNeq;
+		f.piFlat[5]+=ez[spd]*ey[spd]*fNeq;
+		f.piFlat[6]+=ex[spd]*ez[spd]*fNeq;
+		f.piFlat[7]+=ey[spd]*ez[spd]*fNeq;
+		f.piFlat[8]+=ez[spd]*ez[spd]*fNeq;
 
 	}
 }
@@ -165,8 +167,8 @@ void Lattice::computeFout(LBM_DataHandler& f)
 	}
 
 	// get (flattened) second-order moment of particle density distribution
-	//compute_piFlat(f);
-	//regularize(f);
+	compute_piFlat(f);
+	regularize(f);
 	relax(f);
 
 }
