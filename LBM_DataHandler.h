@@ -33,6 +33,7 @@ public:
 	float * f; // dangerous, but publicly available
 	float * fEq;
 	float * ft;
+	float piFlat[9];
 
 private:
 	const int numSpd;
