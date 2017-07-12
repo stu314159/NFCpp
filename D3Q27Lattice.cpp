@@ -61,6 +61,24 @@ D3Q27Lattice::~D3Q27Lattice()
 
 }
 
+void D3Q27Lattice::set_inlet_bc_micro(LBM_DataHandler& f)
+{
+  //finish me...
+}
 
+void D3Q27Lattice::set_inlet_bc_macro(LBM_DataHandler& f)
+{
+	//finish me...
+}
+
+void D3Q27Lattice::set_outlet_bc_micro(LBM_DataHandler& f)
+{
+	//finish me...
+}
+
+void D3Q27Lattice::set_outlet_bc_macro(LBM_DataHandler& f)
+{
+	//finish me...
+}
 
 

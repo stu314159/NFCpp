@@ -51,6 +51,24 @@ D3Q19Lattice::~D3Q19Lattice()
 
 }
 
+void D3Q19Lattice::set_inlet_bc_micro(LBM_DataHandler& f)
+{
+  //finish me...
+}
 
+void D3Q19Lattice::set_inlet_bc_macro(LBM_DataHandler& f)
+{
+	//finish me...
+}
+
+void D3Q19Lattice::set_outlet_bc_micro(LBM_DataHandler& f)
+{
+	//finish me...
+}
+
+void D3Q19Lattice::set_outlet_bc_macro(LBM_DataHandler& f)
+{
+	//finish me...
+}
 
 

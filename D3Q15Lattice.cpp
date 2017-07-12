@@ -43,3 +43,23 @@ D3Q15Lattice::~D3Q15Lattice()
 
 }
 
+void D3Q15Lattice::set_inlet_bc_micro(LBM_DataHandler& f)
+{
+  //finish me...
+}
+
+void D3Q15Lattice::set_inlet_bc_macro(LBM_DataHandler& f)
+{
+	//finish me...
+}
+
+void D3Q15Lattice::set_outlet_bc_micro(LBM_DataHandler& f)
+{
+	//finish me...
+}
+
+void D3Q15Lattice::set_outlet_bc_macro(LBM_DataHandler& f)
+{
+	//finish me...
+}
+

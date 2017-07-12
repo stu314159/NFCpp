@@ -30,6 +30,12 @@ class Lattice{
     void computeEquilibrium(float * fEq, const float ux, const float uy, const float uz, const float rho);
     void computeFout(LBM_DataHandler& f);
     void bounceBack(LBM_DataHandler& f);
+
+    virtual void set_inlet_bc_micro(LBM_DataHandler& f) = 0;
+    virtual void set_inlet_bc_macro(LBM_DataHandler& f) = 0;
+    virtual void set_outlet_bc_micro(LBM_DataHandler& f) = 0;
+    virtual void set_outlet_bc_macro(LBM_DataHandler& f) = 0;
+
     // declarations for lattice variables common to all subclasses
 
 

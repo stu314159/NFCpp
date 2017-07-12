@@ -14,6 +14,10 @@ class D3Q27Lattice: public Lattice
 public:
 	D3Q27Lattice(const int Nx, const int Ny, const int Nz);
 	~D3Q27Lattice();
+	void set_inlet_bc_micro(LBM_DataHandler& f);
+	void set_inlet_bc_macro(LBM_DataHandler& f);
+	void set_outlet_bc_micro(LBM_DataHandler& f);
+	void set_outlet_bc_macro(LBM_DataHandler& f);
 
 private:
 	static const int numSpd=27;
