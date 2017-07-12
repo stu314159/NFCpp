@@ -43,4 +43,9 @@ void Lattice::computeEquilibrium(float * fEq,const float ux, const float uy, con
 	}
 }
 
+void Lattice::computeFout(LBM_DataHandler& f)
+{
+	// do steps to calculate fOut and put it into f.f field
 
+
+}

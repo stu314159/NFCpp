@@ -14,6 +14,7 @@
 #include "D3Q15Lattice.h"
 #include "D3Q19Lattice.h"
 #include "D3Q27Lattice.h"
+#include "LBM_DataHandler.h"
 
 class LBM_Problem
 {

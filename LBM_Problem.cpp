@@ -138,6 +138,42 @@ void LBM_Problem::do_TimeStep(bool isEven)
 		fIn = fOdd; fOut = fEven;
 	}
 
+	// ideally, all of these would be done in parallel
+	for(int nd=0;nd<nnodes;nd++)
+	{ //iterate over all nodes
+		// load relevant data into an LBM Data Handler
+		LBM_DataHandler fData(numSpd);
+		for(int spd=0;spd<numSpd;spd++)
+		{   // density distribution data
+			fData.f[spd]=fIn[getIdx(nnodes,numSpd,nd,spd)];
+		}
+		// set node type and boundary conditions as appropriate
+		if(snl[nd]==1)
+		{
+			fData.nodeType = 1; // solid node
+
+		}else if(inl[nd]==1)
+		{
+			fData.nodeType = 2; // inlet node
+			fData.u_bc = u_lbm;
+		}else if(onl[nd]==1)
+		{
+			fData.nodeType = 3; // outlet node
+			fData.rho_bc = rho_lbm;
+		}else
+		{
+			fData.nodeType = 0; // regular fluid node
+		}
+		// send data to Lattice object to calculate fOut.
+		myLattice->computeFout(fData);
+
+		// stream data to appropriate location in fOut
+		for(int spd=0;spd<numSpd;spd++)
+		{	int tgtNd = adjacency[getIdx(nnodes,numSpd,nd,spd)];
+			fOut[getIdx(nnodes,numSpd,tgtNd,spd)] = fData.f[spd];
+		}
+
+	}
 
 }
 

@@ -1,6 +1,8 @@
 #ifndef LATTICE_H
 #define LATTICE_H
 
+#include "LBM_DataHandler.h"
+
 class Lattice{
   public:
     Lattice(const int Nx, const int Ny, const int Nz);
@@ -25,9 +27,8 @@ class Lattice{
     // common functions for LBM stream/collide tasks
     void computeMacroscopicData(float& rho,float& ux, float& uy, float& uz, const float * f);
     void computeEquilibrium(float * fEq, const float ux, const float uy, const float uz, const float rho);
+    void computeFout(LBM_DataHandler& f);
     // declarations for lattice variables common to all subclasses
-
-
 
 
   private:
