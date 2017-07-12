@@ -75,18 +75,18 @@ void Lattice::computeEquilibrium(float * fEq,const float ux, const float uy, con
 
 void Lattice::computeEquilibrium(LBM_DataHandler& f)
 {
-	float * fEq = f.fEq;
-	float ux = f.ux;
-	float uy = f.uy;
-	float uz = f.uz;
-	float rho = f.rho;
-	computeEquilibrium(fEq,ux,uy,uz,rho);
+
+	computeEquilibrium(f.fEq,f.ux,f.uy,f.uz,f.rho);
 }
 
 void Lattice::compute_piFlat(LBM_DataHandler& f)
 {
 
 	//f.piFlat = {0,0,0,0,0,0,0,0,0}; // initialized in constructor
+	for(int k=0; k<9;k++)
+	{
+		f.piFlat[k]=0.;
+	}
 	for(int spd = 0; spd<numSpd; spd++)
 	{
 		f.piFlat[0]+=ex[spd]*ex[spd]*f.f[spd];
