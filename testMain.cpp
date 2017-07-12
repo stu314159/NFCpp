@@ -21,6 +21,11 @@ int main(int argc, char * argv[]){
 	int Num_Ts = myLBM.get_NumTs();
 	int ts_rep_freq = myLBM.get_tsRepFreq();
 	int plot_freq = myLBM.get_plotFreq();
+
+	// write initial data (might be interesting for re-start)
+	// necessary for compatibility with existing post-processing tools
+	myLBM.write_Data(0);
+
 	std::cout << "Commencing LBM simulation with " << Num_Ts <<
 			" time steps." << std::endl;
 
