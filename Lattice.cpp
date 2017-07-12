@@ -91,7 +91,7 @@ void Lattice::compute_piFlat(LBM_DataHandler& f)
 	{
 		f.piFlat[0]+=ex[spd]*ex[spd]*f.f[spd];
 		f.piFlat[1]+=ey[spd]*ex[spd]*f.f[spd];
-		f.piFlat[2]+=ez[spd]*ez[spd]*f.f[spd];
+		f.piFlat[2]+=ez[spd]*ex[spd]*f.f[spd];
 		f.piFlat[3]+=ex[spd]*ey[spd]*f.f[spd];
 		f.piFlat[4]+=ey[spd]*ey[spd]*f.f[spd];
 		f.piFlat[5]+=ez[spd]*ey[spd]*f.f[spd];
