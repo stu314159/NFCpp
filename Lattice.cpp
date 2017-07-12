@@ -41,6 +41,21 @@ void Lattice::computeMacroscopicData(float& rho, float& ux, float& uy, float& uz
 	ux/=rho; uy/=rho; uz/=rho;
 
 }
+void Lattice::computeMacroscopicData(LBM_DataHandler& f)
+{
+	int rho, ux, uy, uz;
+	rho = 0.; ux = 0.; uy = 0.; uz = 0.;
+	for(int spd = 0; spd<numSpd; spd++)
+	{
+		rho+=f.f[spd];
+		ux+=ex[spd]*f.f[spd];
+		uy+=ey[spd]*f.f[spd];
+		uz+=ez[spd]*f.f[spd];
+	}
+	ux/=rho; uy/=rho; uz/=rho;
+	f.rho = rho; f.ux = ux; f.uy = uy; f.uz = uz;
+
+}
 
 void Lattice::computeEquilibrium(float * fEq,const float ux, const float uy, const float uz, const float rho)
 {
@@ -69,6 +84,7 @@ void Lattice::computeFout(LBM_DataHandler& f)
 		// node type 0, 2, and 3 continue with the following steps:
 
 		// compute macroscopic velocity and pressure
+		computeMacroscopicData(f);
 
 		// node type 2 and 3 apply macroscopic boundary conditions
 
