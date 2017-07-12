@@ -155,11 +155,11 @@ void LBM_Problem::do_TimeStep(bool isEven)
 		}else if(inl[nd]==1)
 		{
 			fData.nodeType = 2; // inlet node
-			fData.u_bc = u_lbm;
+			fData.u_bc = u_lbm; // set this now
 		}else if(onl[nd]==1)
 		{
 			fData.nodeType = 3; // outlet node
-			fData.rho_bc = rho_lbm;
+			fData.rho_bc = rho_lbm; // set this now.
 		}else
 		{
 			fData.nodeType = 0; // regular fluid node

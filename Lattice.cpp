@@ -87,6 +87,10 @@ void Lattice::computeFout(LBM_DataHandler& f)
 		computeMacroscopicData(f);
 
 		// node type 2 and 3 apply macroscopic boundary conditions
+		if(f.nodeType==2) //inlet node
+		{
+			set_inlet_bc_macro(f);
+		}
 
 		// compute equilibrium
 

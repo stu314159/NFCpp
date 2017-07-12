@@ -45,21 +45,37 @@ D3Q15Lattice::~D3Q15Lattice()
 
 void D3Q15Lattice::set_inlet_bc_micro(LBM_DataHandler& f)
 {
-  //finish me...
+  int sp[5]={5,11,12,15,16};
+  int bbSp[5]={6,14,13,18,17};
+  int numBB = 5;
+  for(int s=0;s<numBB;s++)
+  {
+	  f.f[sp[s]]+=f.f[bbSp[s]]-f.fEq[bbSp[s]];
+  }
 }
 
 void D3Q15Lattice::set_inlet_bc_macro(LBM_DataHandler& f)
 {
-	//finish me...
+	f.rho = (1./(1. - f.uz))*(2.*
+			(f.f[6]+f.f[11]+f.f[12]+f.f[13]+f.f[14])+
+			(f.f[0]+f.f[1]+f.f[2]+f.f[3]+f.f[4]));
 }
 
 void D3Q15Lattice::set_outlet_bc_micro(LBM_DataHandler& f)
 {
-	//finish me...
+	int sp[5]={6,14,13,18,17};
+	int bbSp[5]={5,11,12,15,16};
+	int numBB = 5;
+	for(int s=0;s<numBB;s++)
+	{
+		f.f[sp[s]]+=f.f[bbSp[s]]-f.fEq[bbSp[s]];
+	}
 }
 
 void D3Q15Lattice::set_outlet_bc_macro(LBM_DataHandler& f)
 {
-	//finish me...
+	f.uz = -1. + (1./f.rho)*
+			(2.*(f.f[6]+f.f[11]+f.f[12]+f.f[13]+f.f[14])+
+					(f.f[0]+f.f[1]+f.f[2]+f.f[3]+f.f[4]));
 }
 
