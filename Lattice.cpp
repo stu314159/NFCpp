@@ -109,6 +109,14 @@ void Lattice::computeFout(LBM_DataHandler& f)
 		computeEquilibrium(f);
 
 		// node type 2 and 3 apply microscopic boundary conditions and regularization
+		if(f.nodeType==2)
+		{
+			set_inlet_bc_micro(f);
+		}
+		if(f.nodeType==3)
+		{
+			set_outlet_bc_micro(f);
+		}
 
 
 
