@@ -132,47 +132,41 @@ void Lattice::relax(LBM_DataHandler& f)
 void Lattice::computeFout(LBM_DataHandler& f)
 {
 	// node type 1: just bounce back
-	if (f.nodeType==1)
+	// node type 0, 2, and 3 continue with the following steps:
+
+	// compute macroscopic velocity and pressure
+	computeMacroscopicData(f);
+	if(f.nodeType==1)
 	{
-		// just bounce back
-		bounceBack(f);
-
-	}else
-	{
-		// node type 0, 2, and 3 continue with the following steps:
-
-		// compute macroscopic velocity and pressure
-		computeMacroscopicData(f);
-
-		// node type 2 and 3 apply macroscopic boundary conditions
-		if(f.nodeType==2) //inlet node
-		{
-			set_inlet_bc_macro(f);
-		}
-		if(f.nodeType==3) // outlet node
-		{
-			set_outlet_bc_macro(f);
-		}
-
-		// compute equilibrium
-		computeEquilibrium(f);
-
-		// node type 2 and 3 apply microscopic boundary conditions and regularization
-		if(f.nodeType==2)
-		{
-			set_inlet_bc_micro(f);
-		}
-		if(f.nodeType==3)
-		{
-			set_outlet_bc_micro(f);
-		}
-
-		// get (flattened) second-order moment of particle density distribution
-		compute_piFlat(f);
-		regularize(f);
-		relax(f);
-
-
+		f.ux = 0.; f.uy = 0.; f.uz = 0; // solid nodes, zero velocity
 	}
+
+	// node type 2 and 3 apply macroscopic boundary conditions
+	if(f.nodeType==2) //inlet node
+	{
+		set_inlet_bc_macro(f);
+	}
+	if(f.nodeType==3) // outlet node
+	{
+		set_outlet_bc_macro(f);
+	}
+
+	// compute equilibrium
+	computeEquilibrium(f);
+
+	// node type 2 and 3 apply microscopic boundary conditions and regularization
+	if(f.nodeType==2)
+	{
+		set_inlet_bc_micro(f);
+	}
+	if(f.nodeType==3)
+	{
+		set_outlet_bc_micro(f);
+	}
+
+	// get (flattened) second-order moment of particle density distribution
+	compute_piFlat(f);
+	regularize(f);
+	relax(f);
 
 }

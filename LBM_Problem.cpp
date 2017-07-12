@@ -172,7 +172,8 @@ void LBM_Problem::do_TimeStep(bool isEven)
 
 		// stream data to appropriate location in fOut
 		for(int spd=0;spd<numSpd;spd++)
-		{	int tgtNd = adjacency[getIdx(nnodes,numSpd,nd,spd)];
+		{
+			int tgtNd = adjacency[getIdx(nnodes,numSpd,nd,spd)];
 			fOut[getIdx(nnodes,numSpd,tgtNd,spd)] = fData.fOut[spd];
 		}
 
@@ -209,6 +210,14 @@ void LBM_Problem::write_Data(bool isEven)
 
 		// package ux,uy,uz, and rho into output buffers
 		ux[nd]=ux_nd; uy[nd]=uy_nd; uz[nd]=uz_nd; rho[nd]=rho_nd;
+		if(snl[nd]==1)
+		{
+			ux[nd]=0.; uy[nd]=0.; uz[nd]=0.;
+		}
+		if(inl[nd]==1)
+		{
+			uz[nd]=u_lbm;
+		}
 
 	}
 
