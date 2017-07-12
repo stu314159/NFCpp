@@ -71,6 +71,15 @@ void Lattice::computeEquilibrium(float * fEq,const float ux, const float uy, con
 	}
 }
 
+void Lattice::computeEquilibrium(LBM_DataHandler& f)
+{
+	float * fEq = f.fEq;
+	float ux = f.ux;
+	float uy = f.uy;
+	float uz = f.uz;
+	float rho = f.rho;
+	computeEquilibrium(fEq,ux,uy,uz,rho);
+}
 void Lattice::computeFout(LBM_DataHandler& f)
 {
 	// node type 1: just bounce back
@@ -91,12 +100,15 @@ void Lattice::computeFout(LBM_DataHandler& f)
 		{
 			set_inlet_bc_macro(f);
 		}
+		if(f.nodeType==3) // outlet node
+		{
+			set_outlet_bc_macro(f);
+		}
 
 		// compute equilibrium
+		computeEquilibrium(f);
 
 		// node type 2 and 3 apply microscopic boundary conditions and regularization
 	}
-
-
 
 }

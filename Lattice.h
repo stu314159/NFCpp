@@ -29,6 +29,7 @@ class Lattice{
     void computeMacroscopicData(LBM_DataHandler& f);
     void computeEquilibrium(float * fEq, const float ux, const float uy, const float uz, const float rho);
     void computeFout(LBM_DataHandler& f);
+    void computeEquilibrium(LBM_DataHandler& f);
     void bounceBack(LBM_DataHandler& f);
 
     virtual void set_inlet_bc_micro(LBM_DataHandler& f) = 0;
