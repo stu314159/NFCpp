@@ -58,7 +58,7 @@ void D3Q19Lattice::set_inlet_bc_micro(LBM_DataHandler& f)
 	int numBB = 5;
 	for(int s=0;s<numBB;s++)
 	{
-		f.f[sp[s]]+=f.f[bbSp[s]]-f.fEq[bbSp[s]];
+		f.f[sp[s]]=f.fEq[sp[s]]+f.f[bbSp[s]]-f.fEq[bbSp[s]];
 	}
 }
 
@@ -79,7 +79,7 @@ void D3Q19Lattice::set_outlet_bc_micro(LBM_DataHandler& f)
 	int numBB = 5;
 	for(int s=0;s<numBB;s++)
 	{
-		f.f[sp[s]]+=f.f[bbSp[s]]-f.fEq[bbSp[s]];
+		f.f[sp[s]]=f.fEq[sp[s]]+f.f[bbSp[s]]-f.fEq[bbSp[s]];
 	}
 }
 
