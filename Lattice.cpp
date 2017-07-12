@@ -83,7 +83,7 @@ void Lattice::computeEquilibrium(LBM_DataHandler& f)
 
 void Lattice::compute_piFlat(LBM_DataHandler& f)
 {
-	float qP[9];
+
 	f.piFlat = {0,0,0,0,0,0,0,0,0}; // initialize
 	for(int spd = 0; spd<numSpd; spd++)
 	{
@@ -99,6 +99,25 @@ void Lattice::compute_piFlat(LBM_DataHandler& f)
 
 	}
 }
+
+void Lattice::regularize(LBM_DataHandler& f)
+{
+
+	float wa;
+	float rt;
+	for(int spd = 0; spd<numSpd; spd++)
+	{
+		// get leading constant
+		wa = (9.f/2.f)*w[spd];
+		f.f[spd]=f.fEq[spd];
+		// load chunk of Qflat:
+		for(int k=0;k<9;k++)
+		{
+			f.f[spd]+= wa*Qflat[spd*9+k]*f.piFlat[k];
+		}
+	}
+}
+
 
 void Lattice::computeFout(LBM_DataHandler& f)
 {
@@ -140,6 +159,7 @@ void Lattice::computeFout(LBM_DataHandler& f)
 
 		// get (flattened) second-order moment of particle density distribution
 		compute_piFlat(f);
+		regularize(f);
 
 
 
