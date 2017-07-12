@@ -84,7 +84,7 @@ void Lattice::computeEquilibrium(LBM_DataHandler& f)
 void Lattice::compute_piFlat(LBM_DataHandler& f)
 {
 
-	f.piFlat = {0,0,0,0,0,0,0,0,0}; // initialize
+	//f.piFlat = {0,0,0,0,0,0,0,0,0}; // initialized in constructor
 	for(int spd = 0; spd<numSpd; spd++)
 	{
 		f.piFlat[0]+=ex[spd]*ex[spd]*f.f[spd];
