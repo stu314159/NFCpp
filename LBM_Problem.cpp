@@ -139,7 +139,7 @@ void LBM_Problem::do_TimeStep(bool isEven)
 	}
 
 	// ideally, all of these would be done in parallel
-#pragma omp parallel for
+//#pragma omp parallel for
 	for(int nd=0;nd<nnodes;nd++)
 	{ //iterate over all nodes
 
