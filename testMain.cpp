@@ -29,7 +29,7 @@ int main(int argc, char * argv[]){
 
 	std::cout << "Commencing LBM simulation with " << Num_Ts <<
 			" time steps." << std::endl;
-	int ompThreads = omp_get_num_threads();
+	int ompThreads = omp_get_max_threads();
 
 	std::cout << "There are " << ompThreads << " OMP threads detected. " << std::endl;
 

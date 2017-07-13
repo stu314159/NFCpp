@@ -37,9 +37,8 @@ latticeType = args.latticeType
 
 executableName = 'NFCpp'
 
-filesToCopy = ['FluidChannel.py',  'validate.py', 'vtkHelper.py', 'test_script.sh',
-               'inl.lbm', 'onl.lbm', 'snl.lbm', 'params.lbm', 
-               'NFCpp_preprocess.py','NFCpp_postprocess.py']
+filesToCopy = ['NFCpp','genInput.py','FluidChannel.py',  'validate.py', 'vtkHelper.py', 'test_script.sh',
+               'NFCpp_preprocess.py','NFCpp_postprocess.py','gen_gold_standard.py']
 
 
 
@@ -97,5 +96,5 @@ jf.write('module load numpy\n')
 jf.write('module load scipy\n')
 jf.write('module load mpi4py\n')
 jf.write('export OMP_NUM_THREADS=%d\n'%omp_num_threads)
-jf.write('./test_script.sh %d \n'%(latticeType))
+jf.write('./test_script.sh %d %d\n'%(latticeType,omp_num_threads))
 jf.close()
