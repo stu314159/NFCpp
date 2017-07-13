@@ -15,7 +15,7 @@ python ./NFCpp_preprocess.py
 python ./genInput.py sphere.mat $1 200 10 0 20 10 5e-3 0 0
 
 # run the code
-setenv OMP_NUM_THREADS $2
+export OMP_NUM_THREADS=$2
 aprun -d $2 ./NFCpp
 
 # gold standard is set on output from 10th time step
