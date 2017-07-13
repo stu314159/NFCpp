@@ -4,10 +4,12 @@ import numpy.linalg as la
 
 parser = argparse.ArgumentParser(prog='validate.py',description='compare current data output to established gold standard')
 parser.add_argument('dump_number',type=int)
+parser.add_argument('lattice_type',type=int)
 
 args = parser.parse_args()
 
 dump_num = args.dump_number
+lattice_type = args.lattice_type
 
 ux_fn = 'ux%d.b_dat'%dump_num
 uy_fn = 'uy%d.b_dat'%dump_num
@@ -19,7 +21,7 @@ uz = np.fromfile(uz_fn, dtype=np.float32)
 
 umag_tst = np.sqrt(ux**2+uy**2+uz**2)
 
-umag_gold = np.load('gold_standard.npy')
+umag_gold = np.load('gold_standard%d.npy'%lattice_type)
 
 dif_abs = la.norm((umag_tst - umag_gold),ord=1)
 la_norm = la.norm(umag_gold,ord=1)

@@ -19,8 +19,8 @@ export OMP_NUM_THREADS=$2
 ./NFCpp
 
 # gold standard is set on output from 10th time step
-#python ./validate.py 1
-
+# 1st argument: dump number, second argument: lattice type (int)
+#python ./validate.py 10 1
 # post-process the output
 mpirun -np 4 ./NFCpp_postprocess.py
 

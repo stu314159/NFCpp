@@ -3,10 +3,12 @@ import numpy as np
 
 parser = argparse.ArgumentParser(prog='gen_gold_standard.py',description='generate gold standard for validation')
 parser.add_argument('dump_number',type=int)
+parser.add_argument('lattice_type',type=int)
 
 args = parser.parse_args()
 
 dump_num = args.dump_number
+lattice_type = args.lattice_type
 
 ux_fn = 'ux%d.b_dat'%dump_num
 uy_fn = 'uy%d.b_dat'%dump_num
@@ -18,6 +20,6 @@ uz = np.fromfile(uz_fn, dtype=np.float32)
 
 umag = np.sqrt(ux**2+uy**2+uz**2)
 
-filename = 'gold_standard'
+filename = 'gold_standard%d'%lattice_type
 np.save(filename,umag)
 
