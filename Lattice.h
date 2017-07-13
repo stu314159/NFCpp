@@ -2,6 +2,7 @@
 #define LATTICE_H
 
 #include "LBM_DataHandler.h"
+#include <omp.h>
 
 class Lattice{
   public:

@@ -13,6 +13,8 @@
 #include "D3Q19Lattice.h"
 #include "D3Q27Lattice.h"
 
+#include <omp.h>
+
 
 int main(int argc, char * argv[]){
 

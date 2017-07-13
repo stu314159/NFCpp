@@ -9,6 +9,7 @@
 #define LBM_PROBLEM_H_
 
 #include <string>
+#include <omp.h>
 #include "Lattice.h"
 #include "LBM_Problem.h"
 #include "D3Q15Lattice.h"
