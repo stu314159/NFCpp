@@ -141,9 +141,14 @@ void LBM_Problem::do_TimeStep(bool isEven)
 	// ideally, all of these would be done in parallel
 	for(int nd=0;nd<nnodes;nd++)
 	{ //iterate over all nodes
-		//std::cout<<"processing node " << nd << std::endl;
+		if(nd==94798)
+		{
+			std::cout << "processing node " << nd << std::endl;
+		}
+
 		// load relevant data into an LBM Data Handler
 		LBM_DataHandler fData(numSpd);
+
 		for(int spd=0;spd<numSpd;spd++)
 		{   // density distribution data
 			fData.f[spd]=fIn[getIdx(nnodes,numSpd,nd,spd)];
@@ -168,9 +173,17 @@ void LBM_Problem::do_TimeStep(bool isEven)
 		// set omega
 		fData.omega = omega;
 		// send data to Lattice object to calculate fOut.
+		if(nd==94798)
+				{
+					std::cout << "computing Fout " << nd << std::endl;
+				}
 		myLattice->computeFout(fData);
 
 		// stream data to appropriate location in fOut
+		if(nd==94798)
+				{
+					std::cout << "streaming data " << nd << std::endl;
+				}
 		for(int spd=0;spd<numSpd;spd++)
 		{
 			int tgtNd = adjacency[getIdx(nnodes,numSpd,nd,spd)];

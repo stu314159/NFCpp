@@ -108,7 +108,6 @@ void Lattice::regularize(LBM_DataHandler& f)
 {
 
 	float wa;
-	float rt;
 	for(int spd = 0; spd<numSpd; spd++)
 	{
 		// get leading constant
