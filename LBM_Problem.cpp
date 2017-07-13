@@ -181,13 +181,21 @@ void LBM_Problem::do_TimeStep(bool isEven)
 
 		// stream data to appropriate location in fOut
 		if(nd==94798)
-				{
-					std::cout << "streaming data " << nd << std::endl;
-				}
+		{
+			std::cout << "streaming data " << nd << std::endl;
+		}
 		for(int spd=0;spd<numSpd;spd++)
 		{
+			if(nd==94798)
+			{
+				std::cout << "streaming speed " << spd << std::endl;
+			}
 			int tgtNd = adjacency[getIdx(nnodes,numSpd,nd,spd)];
 			fOut[getIdx(nnodes,numSpd,tgtNd,spd)] = fData.fOut[spd];
+		}
+		if(nd==94798)
+		{
+			std::cout << "done streaming data " << nd << std::endl;
 		}
 
 	}
