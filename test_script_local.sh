@@ -20,5 +20,5 @@ python ./genInput.py sphere.mat $1 200 10 0 20 10 5e-3 0 0
 #python ./validate.py 1
 
 # post-process the output
-aprun -n 4 ./NFCpp_postprocess.py
+mpirun -np 4 ./NFCpp_postprocess.py
 
