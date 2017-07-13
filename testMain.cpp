@@ -40,7 +40,7 @@ int main(int argc, char * argv[]){
 		{
 			std::cout << "Executing time step " << ts+1 << std::endl;
 		}
-		std::cout << "entering do_TimeStep" << std::endl;
+		//std::cout << "entering do_TimeStep" << std::endl;
 		// do lattice Boltzmann time step calculations
 		myLBM.do_TimeStep(ts%2==0);
 
