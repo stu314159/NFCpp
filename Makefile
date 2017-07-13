@@ -1,5 +1,5 @@
 MPI_CC=g++
-MPI_FLAGS= -std=c++11 -g -O0
+MPI_FLAGS= -std=c++11 -O3 -Wall
 
 ifeq ($(PE_ENV),PGI)  ## requires module swap pgi/14.3.0 pgi/15.10.0
 	MPI_FLAGS= -std=c++11 -g -O0 -Mbounds
@@ -12,7 +12,7 @@ ifeq ($(PE_ENV),CRAY)
 endif
 
 ifeq ($(PE_ENV),INTEL)
-	MPI_FLAGS= -std=c++11 -g -O0 -CB
+	MPI_FLAGS= -std=c++11 -g -O0  
 	MPI_CC=CC
 endif
 
