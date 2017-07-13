@@ -12,7 +12,7 @@ ifeq ($(PE_ENV),CRAY)
 endif
 
 ifeq ($(PE_ENV),INTEL)
-	MPI_FLAGS= -std=c++11 -g -O0  
+	MPI_FLAGS= -std=c++11 -O2 -Wall -xHost 
 	MPI_CC=CC
 endif
 
