@@ -90,7 +90,7 @@ for s in filesToCopy:
 #jf.write('cd $JOBDIR \n')  #<--- this was an error
 
 # invoke execution
-jf.write('module swap PrgEnv-cray PrgEnv-intel\n')
+#jf.write('module swap PrgEnv-cray PrgEnv-intel\n')
 jf.write('module load costinit\n')
 jf.write('module load python\n')
 jf.write('module load numpy\n')
