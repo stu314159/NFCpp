@@ -1,6 +1,5 @@
 #!/bin/bash
 # $1 - lattice type
-# $2 - OMP num threads
 # 
 # 1 = D3Q15  
 # 2 = D3Q19 
@@ -15,8 +14,7 @@ python ./NFCpp_preprocess.py
 python ./genInput.py sphere.mat $1 200 10 0 20 10 5e-3 0 0
 
 # run the code
-export OMP_NUM_THREADS=$2
-aprun -d $2 ./NFCpp
+aprun -B ./NFCpp
 
 # gold standard is set on output from 10th time step
 #python ./validate.py 1

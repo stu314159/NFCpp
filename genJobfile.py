@@ -13,10 +13,10 @@ parser.add_argument('jobName',type=str)
 parser.add_argument('nnodes',type=int)
 parser.add_argument('ppn',type=int)
 parser.add_argument('mpi_procs_per_node',type=int)
+parser.add_argument('omp_numthread_per_node',type=int)
 parser.add_argument('runtimeNumHours',type=int)
 parser.add_argument('queue',type=str)
-parser.add_argument('latticeType',type=str)
-parser.add_argument('partitionType',type=str)
+parser.add_argument('latticeType',type=int)
 
 
 # parse input arguments
@@ -29,18 +29,17 @@ jobName = args.jobName
 nnodes = args.nnodes
 ppn = args.ppn
 mpi_procs_per_node = args.mpi_procs_per_node
+omp_num_threads = args.omp_numthread_per_node
 runtimeNumHours = args.runtimeNumHours
 queue = args.queue
 latticeType = args.latticeType
-partitionType = args.partitionType
 
-executableName = 'pyNFC_test.py'
 
-filesToCopy = ['FluidChannel.py', 'pyLattice.py', 'pyNFC.py', 'pyNFC_test.py',
-               'pyNFC_Util.py', 'validate.py', 'vtkHelper.py', 'test_script.sh',
-               'inl.lbm', 'onl.lbm', 'snl.lbm', 'params.lbm', 'parts.lbm',
-               'pyPartition.py','pyNFC_preprocess.py','pyNFC_postprocess.py',
-                'partition_suggestion.py','partition_compare.py']
+executableName = 'NFCpp'
+
+filesToCopy = ['FluidChannel.py',  'validate.py', 'vtkHelper.py', 'test_script.sh',
+               'inl.lbm', 'onl.lbm', 'snl.lbm', 'params.lbm', 
+               'pyPartition.py','NFCpp_preprocess.py','NFCpp_postprocess.py']
 
 
 
@@ -63,8 +62,8 @@ jf = open(jobfileName,'w')
 jf.write('#!/bin/bash \n') # the shell
 jf.write('#PBS -A %s \n'%proj_id) # project identifier
 jf.write('#PBS -q %s \n'%queue) # specify queue
-jf.write('#PBS -l select=%d:ncpus=%d:mpiprocs=%d \n'% \
-         (nnodes,ppn,mpi_procs_per_node))
+jf.write('#PBS -l select=%d:ncpus=%d:mpiprocs=%d:ompthreads=%d \n'% \
+         (nnodes,ppn,mpi_procs_per_node,omp_num_threads))
 jf.write('#PBS -l walltime=%s \n'%walltime)
 jf.write('#PBS -l ccm=1 \n') # specify cluster compatibility mode.  Why wouldn't you?
 
@@ -97,5 +96,6 @@ jf.write('module load python\n')
 jf.write('module load numpy\n')
 jf.write('module load scipy\n')
 jf.write('module load mpi4py\n')
-jf.write('./test_script.sh %s %s %d\n'%(latticeType,partitionType,mpi_procs))
+jf.write('export OMP_NUM_THREADS=%d\n'%omp_num_threads)
+jf.write('./test_script.sh %d \n'%(latticeType))
 jf.close()
