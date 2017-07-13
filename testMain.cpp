@@ -16,8 +16,6 @@
 
 int main(int argc, char * argv[]){
 
-	std::cout << "Hello test main!" << std::endl;
-
 	LBM_Problem myLBM = LBM_Problem();
 	int Num_Ts = myLBM.get_NumTs();
 	int ts_rep_freq = myLBM.get_tsRepFreq();
