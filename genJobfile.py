@@ -39,7 +39,7 @@ executableName = 'NFCpp'
 
 filesToCopy = ['FluidChannel.py',  'validate.py', 'vtkHelper.py', 'test_script.sh',
                'inl.lbm', 'onl.lbm', 'snl.lbm', 'params.lbm', 
-               'pyPartition.py','NFCpp_preprocess.py','NFCpp_postprocess.py']
+               'NFCpp_preprocess.py','NFCpp_postprocess.py']
 
 
 
