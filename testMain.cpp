@@ -6,6 +6,7 @@
  */
 
 #include <iostream>
+#include <ctime>
 #include "Lattice.h"
 #include "LBM_Problem.h"
 #include "D3Q15Lattice.h"
@@ -29,6 +30,12 @@ int main(int argc, char * argv[]){
 	std::cout << "Commencing LBM simulation with " << Num_Ts <<
 			" time steps." << std::endl;
 
+	clock_t tStart, tEnd;
+	float runTime;
+	float totalLPU, LPUperSecond;
+
+
+	tStart = clock();
 	for(int ts = 0; ts<Num_Ts; ts++)
 	{
 		if(((ts+1)%ts_rep_freq)==0)
@@ -47,8 +54,12 @@ int main(int argc, char * argv[]){
 
 
 	}
+	tEnd = clock();
+	runTime = ((float)tEnd - (float)tStart)/CLOCKS_PER_SEC;
+	totalLPU = Num_Ts*myLBM.getNumNodes();
+	LPUperSecond = totalLPU/runTime;
+	std::cout << "Estimated performance: " << LPUperSecond <<" LPU/sec"<< std::endl;
 
-	std::cout << "everything done" << std::endl;
 	return 0;
 }
 

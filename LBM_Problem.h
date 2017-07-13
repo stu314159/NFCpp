@@ -24,6 +24,7 @@ public:
 	int get_NumTs(){return Num_ts;};
 	int get_tsRepFreq(){return ts_rep_freq;};
 	int get_plotFreq(){return plot_freq;};
+	int getNumNodes(){return Nx*Ny*Nz;};
 	void do_TimeStep(bool isEven);
 	void write_Data(bool isEven);
 
