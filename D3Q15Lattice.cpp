@@ -46,8 +46,8 @@ D3Q15Lattice::~D3Q15Lattice()
 
 void D3Q15Lattice::set_inlet_bc_micro(LBM_DataHandler& f)
 {
-  int sp[5]={5,11,12,15,16};
-  int bbSp[5]={6,14,13,18,17};
+  int sp[5]={5,7,8,9,10};
+  int bbSp[5]={6,11,12,13,14};
   int numBB = 5;
   for(int s=0;s<numBB;s++)
   {
@@ -66,8 +66,8 @@ void D3Q15Lattice::set_inlet_bc_macro(LBM_DataHandler& f)
 
 void D3Q15Lattice::set_outlet_bc_micro(LBM_DataHandler& f)
 {
-	int sp[5]={6,14,13,18,17};
-	int bbSp[5]={5,11,12,15,16};
+	int sp[5]={6,11,12,13,14};
+	int bbSp[5]={5,7,8,9,10};
 	int numBB = 5;
 	for(int s=0;s<numBB;s++)
 	{
