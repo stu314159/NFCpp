@@ -41,6 +41,11 @@ int main(int argc, char * argv[]){
 	{
 		int tid = omp_get_thread_num();
 		int size = omp_get_num_threads();
+		double tS_omp, tE_omp;
+		if(tid==0)
+		{
+			tS_omp = omp_get_wtime();
+		}
 		std::cout << "thread " << tid << " of " << size << " entering time step loop." << std::endl;
 		tStart = clock();
 		for(int ts = 0; ts<Num_Ts; ts++)
@@ -68,6 +73,14 @@ int main(int argc, char * argv[]){
 			}
 
 
+		}
+		if(tid==0)
+		{
+			tE_omp = omp_get_wtime();
+			runTime = tE_omp - tS_omp;
+			totalLPU = Num_Ts*myLBM.getNumNodes();
+			LPUperSecond = totalLPU/runTime;
+			std::cout << "From OMP - Estimated performance: " << LPUperSecond << " LPU/sec" << std::endl;
 		}
 	}
 	tEnd = clock();
