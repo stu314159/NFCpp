@@ -21,5 +21,6 @@ aprun -n 1 -d $2 ./NFCpp
 #python ./validate.py 1
 
 # post-process the output
-aprun -n 4 ./NFCpp_postprocess.py
+#aprun -n 4 ./NFCpp_postprocess.py
+python ./processNFC.py
 
