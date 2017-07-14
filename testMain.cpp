@@ -33,7 +33,6 @@ int main(int argc, char * argv[]){
 
 	std::cout << "There are " << ompThreads << " OMP threads detected. " << std::endl;
 
-	clock_t tStart, tEnd;
 	float runTime;
 	float totalLPU, LPUperSecond;
 
@@ -47,7 +46,7 @@ int main(int argc, char * argv[]){
 			tS_omp = omp_get_wtime();
 		}
 		std::cout << "thread " << tid << " of " << size << " entering time step loop." << std::endl;
-		tStart = clock();
+
 		for(int ts = 0; ts<Num_Ts; ts++)
 		{
 			if(((ts+1)%ts_rep_freq)==0)
@@ -83,11 +82,6 @@ int main(int argc, char * argv[]){
 			std::cout << "From OMP - Estimated performance: " << LPUperSecond << " LPU/sec" << std::endl;
 		}
 	}
-	tEnd = clock();
-	runTime = ((float)tEnd - (float)tStart)/CLOCKS_PER_SEC;
-	totalLPU = Num_Ts*myLBM.getNumNodes();
-	LPUperSecond = totalLPU/runTime;
-	std::cout << "Estimated performance: " << LPUperSecond <<" LPU/sec"<< std::endl;
 
 	return 0;
 }
