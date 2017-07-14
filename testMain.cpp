@@ -37,25 +37,30 @@ int main(int argc, char * argv[]){
 	float runTime;
 	float totalLPU, LPUperSecond;
 
-
-	tStart = clock();
-	for(int ts = 0; ts<Num_Ts; ts++)
+#pragma omp parallel
 	{
-		if(((ts+1)%ts_rep_freq)==0)
+		int tid = omp_get_thread_num();
+		int size = omp_get_num_threads();
+		std::cout << "thread " << tid << " of " << size << " entering time step loop." << std::endl;
+		tStart = clock();
+		for(int ts = 0; ts<Num_Ts; ts++)
 		{
-			std::cout << "Executing time step " << ts+1 << std::endl;
+			if(((ts+1)%ts_rep_freq)==0)
+			{
+				std::cout << "Executing time step " << ts+1 << std::endl;
+			}
+			//std::cout << "entering do_TimeStep" << std::endl;
+			// do lattice Boltzmann time step calculations
+			myLBM.do_TimeStep(ts%2==0);
+
+			if(((ts+1)%plot_freq)==0)
+			{
+				std::cout << "Outputting data for time step " << ts+1 << std::endl;
+				myLBM.write_Data(ts%2);
+			}
+
+
 		}
-		//std::cout << "entering do_TimeStep" << std::endl;
-		// do lattice Boltzmann time step calculations
-		myLBM.do_TimeStep(ts%2==0);
-
-		if(((ts+1)%plot_freq)==0)
-		{
-			std::cout << "Outputting data for time step " << ts+1 << std::endl;
-			myLBM.write_Data(ts%2);
-		}
-
-
 	}
 	tEnd = clock();
 	runTime = ((float)tEnd - (float)tStart)/CLOCKS_PER_SEC;
