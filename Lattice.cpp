@@ -64,6 +64,7 @@ void Lattice::computeEquilibrium(float * fEq,const float ux, const float uy, con
 	//this will assume that up-to-date data exists in rho, ux, uy, and uz class variables
 	//and that ex,ey,ez,and w have been updated with the lattice-specific info
 	float cu;
+
 	for(int spd = 0; spd<numSpd;spd++)
 	{
 		fEq[spd] = 0;
@@ -108,6 +109,7 @@ void Lattice::regularize(LBM_DataHandler& f)
 {
 
 	float wa;
+
 	for(int spd = 0; spd<numSpd; spd++)
 	{
 		// get leading constant
@@ -123,6 +125,7 @@ void Lattice::regularize(LBM_DataHandler& f)
 
 void Lattice::relax(LBM_DataHandler& f)
 {
+
 	for(int spd=0;spd<numSpd;spd++)
 	{
 		f.fOut[spd]=f.f[spd]-f.omega*(f.f[spd] - f.fEq[spd]);
