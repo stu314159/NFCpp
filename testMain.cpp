@@ -37,25 +37,51 @@ int main(int argc, char * argv[]){
 	float runTime;
 	float totalLPU, LPUperSecond;
 
-
-	tStart = clock();
-	for(int ts = 0; ts<Num_Ts; ts++)
+#pragma omp parallel
 	{
-		if(((ts+1)%ts_rep_freq)==0)
+		int tid = omp_get_thread_num();
+		int size = omp_get_num_threads();
+		double tS_omp, tE_omp;
+		if(tid==0)
 		{
-			std::cout << "Executing time step " << ts+1 << std::endl;
+			tS_omp = omp_get_wtime();
 		}
-		//std::cout << "entering do_TimeStep" << std::endl;
-		// do lattice Boltzmann time step calculations
-		myLBM.do_TimeStep(ts%2==0);
-
-		if(((ts+1)%plot_freq)==0)
+		std::cout << "thread " << tid << " of " << size << " entering time step loop." << std::endl;
+		tStart = clock();
+		for(int ts = 0; ts<Num_Ts; ts++)
 		{
-			std::cout << "Outputting data for time step " << ts+1 << std::endl;
-			myLBM.write_Data(ts%2);
+			if(((ts+1)%ts_rep_freq)==0)
+			{
+				if(tid==0)
+				{
+					std::cout << "Executing time step " << ts+1 << std::endl;
+				}
+			}
+			//std::cout << "entering do_TimeStep" << std::endl;
+			// do lattice Boltzmann time step calculations
+			myLBM.do_TimeStep(ts%2==0);
+#pragma omp barrier
+			if(((ts+1)%plot_freq)==0)
+			{
+				if(tid==0)
+				{
+
+
+					std::cout << "Outputting data for time step " << ts+1 << std::endl;
+					myLBM.write_Data(ts%2);
+				}
+			}
+
+
 		}
-
-
+		if(tid==0)
+		{
+			tE_omp = omp_get_wtime();
+			runTime = tE_omp - tS_omp;
+			totalLPU = Num_Ts*myLBM.getNumNodes();
+			LPUperSecond = totalLPU/runTime;
+			std::cout << "From OMP - Estimated performance: " << LPUperSecond << " LPU/sec" << std::endl;
+		}
 	}
 	tEnd = clock();
 	runTime = ((float)tEnd - (float)tStart)/CLOCKS_PER_SEC;
