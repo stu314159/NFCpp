@@ -139,8 +139,10 @@ void LBM_Problem::do_TimeStep(bool isEven)
 	}
 
 	// ideally, all of these would be done in parallel
+	int size = omp_get_num_threads();
+	int tIdx = omp_get_thread_num();
 
-	for(int nd=0;nd<nnodes;nd++)
+	for(int nd=tIdx;nd<nnodes;nd+=size)
 	{ //iterate over all nodes
 
 		// load relevant data into an LBM Data Handler

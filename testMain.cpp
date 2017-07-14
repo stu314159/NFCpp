@@ -47,16 +47,24 @@ int main(int argc, char * argv[]){
 		{
 			if(((ts+1)%ts_rep_freq)==0)
 			{
-				std::cout << "Executing time step " << ts+1 << std::endl;
+				if(tid==0)
+				{
+					std::cout << "Executing time step " << ts+1 << std::endl;
+				}
 			}
 			//std::cout << "entering do_TimeStep" << std::endl;
 			// do lattice Boltzmann time step calculations
 			myLBM.do_TimeStep(ts%2==0);
-
+#pragma omp barrier
 			if(((ts+1)%plot_freq)==0)
 			{
-				std::cout << "Outputting data for time step " << ts+1 << std::endl;
-				myLBM.write_Data(ts%2);
+				if(tid==0)
+				{
+
+
+					std::cout << "Outputting data for time step " << ts+1 << std::endl;
+					myLBM.write_Data(ts%2);
+				}
 			}
 
 
